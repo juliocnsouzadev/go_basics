@@ -1,11 +1,11 @@
-package buy
+package booking
 
 import (
 	"fmt"
 	"net/mail"
 )
 
-type Buy struct {
+type Booking struct {
 	Name     string
 	LastName string
 	Email    string
@@ -37,35 +37,35 @@ func validEmail(email string) bool {
 	return err == nil
 }
 
-func Read(remainingTickets uint) *Buy {
-	var buy = Buy{"", "", "", 0}
+func Read(remainingTickets uint) *Booking {
+	var booking = Booking{"", "", "", 0}
 	fmt.Println("---------------------------------------------")
 
 	fmt.Println("What's your name?")
-	fmt.Scan(&buy.Name)
-	for !validateByLength("Name", buy.Name, 3) {
-		fmt.Scan(&buy.Name)
+	fmt.Scan(&booking.Name)
+	for !validateByLength("Name", booking.Name, 3) {
+		fmt.Scan(&booking.Name)
 	}
 
 	fmt.Println("What's your last name?")
-	fmt.Scan(&buy.LastName)
-	for !validateByLength("Last name", buy.LastName, 3) {
-		fmt.Scan(&buy.LastName)
+	fmt.Scan(&booking.LastName)
+	for !validateByLength("Last name", booking.LastName, 3) {
+		fmt.Scan(&booking.LastName)
 	}
 
 	fmt.Println("What's your email?")
-	fmt.Scan(&buy.Email)
-	for !validEmail(buy.Email) {
-		fmt.Scan(&buy.Email)
+	fmt.Scan(&booking.Email)
+	for !validEmail(booking.Email) {
+		fmt.Scan(&booking.Email)
 	}
 
 	fmt.Println("How many tickets do you want to book?")
-	fmt.Scan(&buy.Tickets)
-	for !validateMin("Ticket", buy.Tickets, 1) {
-		fmt.Scan(&buy.Tickets)
+	fmt.Scan(&booking.Tickets)
+	for !validateMin("Ticket", booking.Tickets, 1) {
+		fmt.Scan(&booking.Tickets)
 	}
 
-	if remainingTickets < buy.Tickets {
+	if remainingTickets < booking.Tickets {
 		var decison string = ""
 		for decison != "YES" && decison != "NO" {
 			fmt.Printf("Sorry, only %v tickets available. Type NO to cancel or YES to accept buying the %v tickets aviable:\n", remainingTickets, remainingTickets)
@@ -73,13 +73,13 @@ func Read(remainingTickets uint) *Buy {
 		}
 		fmt.Println("---------------------------------------------")
 		if decison == "NO" {
-			fmt.Println("Canceled By User. Bye!\n")
+			fmt.Printf("Canceled By User. Bye!\n")
 			return nil
 		} else {
-			buy.Tickets = remainingTickets
+			booking.Tickets = remainingTickets
 		}
 	} else {
 		fmt.Println("---------------------------------------------")
 	}
-	return &buy
+	return &booking
 }
