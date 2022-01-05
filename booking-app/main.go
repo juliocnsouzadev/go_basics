@@ -9,17 +9,12 @@ import (
 	"time"
 )
 
-const conference = conference.Conference{
+var goConference = conference.Conference{
 	"Go Conference",
 	50,
-	make([]*booking.Booking)
-}
+	make([]*booking.Booking, 0)}
 
-const conferenceName string = "Go Conference"
-const conferenceTickets uint = 50
-
-var remainingTickets uint = conferenceTickets
-var bookings []*booking.Booking
+var remainingTickets uint = goConference.AvailableTickets
 
 func main() {
 	for remainingTickets > 0 {
@@ -32,7 +27,7 @@ func main() {
 
 func greetings() {
 	clear()
-	fmt.Printf("\nWelcome to %v application\n", conferenceName)
+	fmt.Printf("\nWelcome to %v application\n", goConference.Name)
 	fmt.Printf("Get your ticket today! Only %v tickets left!\n", remainingTickets)
 }
 
@@ -41,7 +36,7 @@ func book() {
 	if bookingTransaction != nil {
 		fmt.Printf("%v %v bought %v tickets\nWe will send the tickets to %v. Thank you!\n", bookingTransaction.Name, bookingTransaction.LastName, bookingTransaction.Tickets, bookingTransaction.Email)
 		remainingTickets = remainingTickets - bookingTransaction.Tickets
-		bookings = append(bookings, bookingTransaction)
+		goConference.Bookings = append(goConference.Bookings, bookingTransaction)
 	}
 	wait("... getting ready for next booking in... ", 5)
 	clear()
@@ -54,8 +49,8 @@ func allTickesSoldOut() {
 }
 
 func genReport() {
-	fmt.Printf("\n*** Total of %v Bookings ***\n", len(bookings))
-	for _, booking := range bookings {
+	fmt.Printf("\n*** Total of %v Bookings ***\n", len(goConference.Bookings))
+	for _, booking := range goConference.Bookings {
 		fmt.Printf("> %03d tickets bought by %v %v \n", booking.Tickets, booking.Name, booking.LastName)
 	}
 }
