@@ -16,6 +16,7 @@ func main() {
 	serveMux := http.NewServeMux()
 	serveMux.Handle("/", handlers.NewHelloHandler(logger))
 	serveMux.Handle("/name", handlers.NewNameHandler(logger))
+	serveMux.Handle("/products", handlers.NewProudctsHandler(logger))
 
 	server := &http.Server{
 		Addr:         ":9090",
