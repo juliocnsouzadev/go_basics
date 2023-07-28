@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/juliocnsouzadev/go_basics/bar"
+	"github.com/juliocnsouzadev/go_basics/concurrency"
 	"github.com/juliocnsouzadev/go_basics/foo"
 	"github.com/juliocnsouzadev/go_basics/math"
 )
@@ -13,7 +14,7 @@ import (
 func main() {
 	fooBar()
 	breakLine()
-	calcuations()
+	calculations()
 	breakLine()
 	{
 		checkType(1)
@@ -24,14 +25,16 @@ func main() {
 	}
 	casting()
 	breakLine()
+	concurrency.SimplePrintWithTimeout(10)
+	concurrency.WordCount("some_text.txt")
 }
 
 func breakLine() {
 	fmt.Println("")
 }
 
-func calcuations() {
-	fmt.Println("Enter 2 integer numbers to perform calcuations: ")
+func calculations() {
+	fmt.Println("Enter 2 integer numbers to perform calculations: ")
 
 	var a, b int
 	_, err := fmt.Scanf("%d %d", &a, &b)
