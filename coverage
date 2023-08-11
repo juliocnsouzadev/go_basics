@@ -1,4 +1,9 @@
 mode: set
+github.com/juliocnsouzadev/go_basics/riffle/main.go:20.44,23.16 2 1
+github.com/juliocnsouzadev/go_basics/riffle/main.go:23.16,25.3 1 0
+github.com/juliocnsouzadev/go_basics/riffle/main.go:27.2,31.16 4 1
+github.com/juliocnsouzadev/go_basics/riffle/main.go:35.51,39.2 3 1
+github.com/juliocnsouzadev/go_basics/riffle/main.go:41.13,47.2 5 0
 github.com/juliocnsouzadev/go_basics/palindrome/some_func.go:3.32,4.32 1 1
 github.com/juliocnsouzadev/go_basics/palindrome/some_func.go:4.32,5.28 1 1
 github.com/juliocnsouzadev/go_basics/palindrome/some_func.go:5.28,7.4 1 1
