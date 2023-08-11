@@ -1,0 +1,5 @@
+mode: set
+github.com/juliocnsouzadev/go_basics/palindrome/some_func.go:3.32,4.32 1 1
+github.com/juliocnsouzadev/go_basics/palindrome/some_func.go:4.32,5.28 1 1
+github.com/juliocnsouzadev/go_basics/palindrome/some_func.go:5.28,7.4 1 1
+github.com/juliocnsouzadev/go_basics/palindrome/some_func.go:9.2,9.13 1 1
