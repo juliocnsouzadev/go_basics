@@ -12,7 +12,9 @@
 *.out
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
+vendor/
+
+# IDE
 .idea/vcs.xml
 .idea/modules.xml
 .idea/go_basics.iml
