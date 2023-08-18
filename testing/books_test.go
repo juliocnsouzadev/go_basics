@@ -1,55 +1,54 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"testing"
 )
 
 func TestReadBooks(t *testing.T) {
-	csvFile, err := os.Open("../data/books.csv")
-	if err != nil {
-		t.Fatal("Can't open CSV file")
-	}
-	expectedBooksLen := 3
-	books, err := ReadBooks(csvFile)
-	if err != nil {
-		fmt.Printf("Error %v\n", err)
-		t.Fatal("Can't read CSV data")
-	}
-	actualBooksLen := len(books)
-
-	if expectedBooksLen != actualBooksLen {
-		t.Errorf("Unexpected number of books, got: %d, want: %d.", actualBooksLen, expectedBooksLen)
-	}
-
-	expectedBooks := []Book{
+	cases := []struct {
+		fixture string
+		err     bool
+		name    string
+		records int
+	}{
 		{
-			title:  "The Guardians",
-			author: "John Grisham",
-			year:   2019,
+			fixture: "../data/empty.csv",
+			err:     false,
+			name:    "Empty",
+			records: 0,
 		},
 		{
-			title:  "To Kill a Mockingbird",
-			author: "Harper Lee",
-			year:   2005,
+			fixture: "../data/invalid.csv",
+			err:     true,
+			name:    "Invalid",
+			records: 1,
 		},
 		{
-			title:  "War and Peace",
-			author: "Leo Tolstoy",
-			year:   1982,
+			fixture: "../data/books.csv",
+			err:     false,
+			name:    "Valid",
+			records: 3,
 		},
 	}
 
-	for i, b := range books {
-		if expectedBooks[i].title != b.title {
-			t.Errorf("Unexpected title, got: %s, want: %s.", b.title, expectedBooks[i].title)
-		}
-		if expectedBooks[i].author != b.author {
-			t.Errorf("Unexpected author, got: %s, want: %s.", b.author, expectedBooks[i].author)
-		}
-		if expectedBooks[i].year != b.year {
-			t.Errorf("Unexpected year, got: %d, want: %d.", b.year, expectedBooks[i].year)
-		}
+	for _, tc := range cases {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			csvFile, err := os.Open(tc.fixture)
+			if err != nil {
+				t.Fatal("Can't open CSV file")
+			}
+			books, err := ReadBooks(csvFile)
+
+			if err != nil && !tc.err {
+				t.Errorf("Expected an error for file %s", tc.fixture)
+			}
+
+			if tc.records != len(books) {
+				t.Errorf("Unexpected number of books, got: %d, want: %d.", len(books), tc.records)
+			}
+		})
 	}
 }
